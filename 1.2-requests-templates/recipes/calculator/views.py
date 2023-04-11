@@ -17,6 +17,13 @@ DATA = {
         'помидор, ломтик': 1,
     },
     # можете добавить свои рецепты ;)
+
+    'vodka': {
+        'водка, мл': 250,
+        'сало, г': 100,
+        'хлеб, ломтик': 5
+    }
+
 }
 
 # Напишите ваш обработчик. Используйте DATA как источник данных
@@ -28,3 +35,14 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+
+def recipe_calc(request, recipe_name):
+    persons = int(request.GET.get('servings', 1))
+    context = {
+        'name': recipe_name,
+        'recipe': {ing: (amount * persons) for ing, amount in DATA[recipe_name].items()},
+        'persons': persons
+    }
+
+    return render(request, 'calculator/index.html', context)
