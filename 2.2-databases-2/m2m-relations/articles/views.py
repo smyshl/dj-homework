@@ -12,11 +12,11 @@ def articles_list(request):
 
     object_list = Article.objects.all().order_by(ordering)
 
-    for article in object_list:
-        print(article)
-        print(article.scopes.all())
-        for scope in article.scopes.all():
-            print(scope, scope.is_main)
+    # for article in object_list:
+    #     print(article)
+    #     print(article.scopes.all())
+    #     for scope in article.scopes.all():
+    #         print(scope, scope.is_main)
 
     context = {
         'object_list': object_list
